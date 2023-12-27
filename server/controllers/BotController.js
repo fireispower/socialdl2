@@ -15,7 +15,7 @@ const {
 class BotController {
   constructor(bot, body) {
     this.bot = bot;
-    this.text = body.message.text ? body.message.text : ''
+    this.text = body.message ? body.message.text : ''
     this.body = body;
   }
 
