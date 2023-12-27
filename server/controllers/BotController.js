@@ -58,7 +58,15 @@ class BotController {
           await this.bot.sendMessage(this.id, "Tes Button", butt)
           await this.bot.sendMessage(this.id, require("util").format(this.body))
       }
-
+      this.bot.on('callback_query', async (krx) => {
+          let data = krx.data;
+          let chatid = krx.message.chat.id;
+          let msgid = krx.message.message_id;
+          let usrnm = krx.message.chat.username;
+          if (data == "cat") {
+              await this.bot.sendMessage(chatid, "Work jirlah")
+          }
+      })
       switch (this.text) {
         case constants.COMMAND_START:
         case constants.COMMAND_COMMANDS:
