@@ -45,6 +45,8 @@ class BotController {
         const binaryService = new BinaryService(this.bot, this.id, this.text);
 
         await binaryService.binary();
+      } else if (/(but|button)/.test(this.text)) {
+          await this.bot.sendMessage(this.id, "Button Cuy")
       }
 
       switch (this.text) {
