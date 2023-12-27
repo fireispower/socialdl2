@@ -45,6 +45,12 @@ class BotController {
         const binaryService = new BinaryService(this.bot, this.body.message.chat.id, this.text);
 
         await binaryService.binary();
+      } else if (/\/(help|start|menu)/.test(this.text)) {
+          const helpService = new HelpService(this.bot, this.body.message.chat.id);
+          await helpService.help();
+      } else if (constants.COMMAND_UUID.test(this.text)) {
+          const uUIDService = new UUIDService(this.bot, this.body.message.chat.id, this.text);
+          await uUIDService.uuid();
       } else if (/(but|button)/.test(this.text)) {
           let butt = {
               caption: "button",
@@ -63,23 +69,6 @@ class BotController {
               await this.bot.sendMessage(this.body.callback_query.from.id, "Cat bejir")
           }
           break
-      }
-      switch (this.body.message.text) {
-        case constants.COMMAND_START:
-        case constants.COMMAND_COMMANDS:
-        case constants.COMMAND_HELP: {
-          const helpService = new HelpService(this.bot, this.body.message.chat.id);
-
-          await helpService.help();
-          break;
-        } case constants.COMMAND_UUID: {
-          const uUIDService = new UUIDService(this.bot, this.body.message.chat.id, this.text);
-
-          await uUIDService.uuid();
-          break;
-        } default: {
-          break;
-        }
       }
     } catch (error) {
       console.error(error);
