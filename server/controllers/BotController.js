@@ -15,7 +15,6 @@ const {
 class BotController {
   constructor(bot, body) {
     this.bot = bot;
-    this.id = body.message.chat.id ? body.message.chat.id : body.callback_query.from.id
     this.text = body.message.text ? body.message.text : ''
     this.body = body;
   }
@@ -59,9 +58,9 @@ class BotController {
           await this.bot.sendMessage(this.id, "Tes Button", butt)
           await this.bot.sendMessage(this.id, require("util").format(this.body))
       }
-      switch (this.body.callback_query.message) {
+      switch (this.body.callback_query.data) {
           case "cat": {
-              this.bot.sendMessage(this.body.callback_query.from.id, "Cat bejir")
+              await this.bot.sendMessage(this.body.callback_query.from.id, "Cat bejir")
           }
           break
       }
