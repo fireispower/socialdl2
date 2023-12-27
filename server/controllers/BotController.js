@@ -46,7 +46,15 @@ class BotController {
 
         await binaryService.binary();
       } else if (/(but|button)/.test(this.text)) {
-          await this.bot.sendMessage(this.id, "Button Cuy")
+          let butt = {
+              caption: "button",
+              reply_markup: JSON.stringify({
+                  inline_keyboard: [
+                      [{text: "Kucing", callback_data: "cat"}]
+                  ]
+              })
+          }
+          await this.bot.sendMessage(this.id, "Tes Button", butt)
       }
 
       switch (this.text) {
