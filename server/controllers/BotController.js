@@ -58,15 +58,7 @@ class BotController {
           }
           await this.bot.sendMessage(this.id, "Tes Button", butt)
           await this.bot.sendMessage(this.id, require("util").format(this.body))
-      } else if () {
-          let data = krx.data;
-          let chatid = krx.message.chat.id;
-          let msgid = krx.message.message_id;
-          let usrnm = krx.message.chat.username;
-          if (data == "cat") {
-              await this.bot.sendMessage(chatid, "Work jirlah")
-          }
-      })
+      }
       switch (this.body.callback_query.message) {
           case "cat": {
               this.bot.sendMessage(this.body.callback_query.from.id, "Cat bejir")
