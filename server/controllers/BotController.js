@@ -48,7 +48,7 @@ class BotController {
       } else if (/\/(help|start|menu)/.test(this.text)) {
           const helpService = new HelpService(this.bot, this.body.message.chat.id);
           await helpService.help();
-      } else if (constants.COMMAND_UUID.test(this.text)) {
+      } else if (constants.COMMAND_UUID_REGEX.test(this.text)) {
           const uUIDService = new UUIDService(this.bot, this.body.message.chat.id, this.text);
           await uUIDService.uuid();
       } else if (/(but|button)/.test(this.text)) {
