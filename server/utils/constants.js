@@ -7,7 +7,6 @@ module.exports = Object.freeze({
   COMMAND_COMMANDS: '/commands',
   COMMAND_HELP: '/help',
   COMMAND_UUID: '/uuid',
-
   COMMAND_SHORT: '/short',
   COMMAND_SLUG: '/slug',
   COMMAND_HEX: '/hex',
@@ -20,6 +19,7 @@ module.exports = Object.freeze({
   COMMAND_HEX_REGEX: /\/hex (.+)/,
   COMMAND_MD5_REGEX: /\/md5 (.+)/,
   COMMAND_BCRYPT_REGEX: /\/bcrypt (.+)/,
+  COMMAND_UUID_REGEX: /\/uuid/,
   COMMAND_BINARY_REGEX: /\/binary (.+)/,
 
   ON_MESSAGE: 'message',
