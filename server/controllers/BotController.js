@@ -15,8 +15,8 @@ const {
 class BotController {
   constructor(bot, body) {
     this.bot = bot;
-    this.id = body.message.chat.id || body.callback_query.from.id
-    this.text = body.message.text;
+    this.id = body.message.chat.id ? body.message.chat.id : body.callback_query.from.id
+    this.text = body.message.text ? body.message.text : ''
     this.body = body;
   }
 
