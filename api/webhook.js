@@ -10,7 +10,6 @@ const { BotController } = require('../server/controllers');
 module.exports = async (request, response) => {
   try {
     const { body } = request;
-    console.log(reqjir)
     if (!body.update_id) {
       return;
     }
