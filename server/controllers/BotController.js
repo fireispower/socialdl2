@@ -13,10 +13,10 @@ const {
 } = require('../services');
 
 class BotController {
-  constructor(bot, id, text, body) {
+  constructor(bot, body) {
     this.bot = bot;
-    this.id = id;
-    this.text = text.replace(telegramConfig.username, '');
+    this.id = body.message.chat.id || body.callback_query.from.id
+    this.text = body.message.text;
     this.body = body;
   }
 
