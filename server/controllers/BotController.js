@@ -51,7 +51,8 @@ class BotController {
               caption: "button",
               reply_markup: JSON.stringify({
                   inline_keyboard: [
-                      [{text: "Kucing", callback_data: "cat"}]
+                      [{text: "Kucing", callback_data: "cat"}],
+                      [{text: "Anjing", callback_data: "dog"}]
                   ]
               })
           }
