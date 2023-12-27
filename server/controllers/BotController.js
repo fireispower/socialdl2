@@ -64,7 +64,7 @@ class BotController {
           }
           break
       }
-      switch (this.body.message.chat.id) {
+      switch (this.body.message.text) {
         case constants.COMMAND_START:
         case constants.COMMAND_COMMANDS:
         case constants.COMMAND_HELP: {
