@@ -10,15 +10,16 @@ const { BotController } = require('../server/controllers');
 module.exports = async (request, response) => {
   try {
     const { body } = request;
-    if (!body) {
+    const reqjir = request
+    /*if (!body) {
       return;
-    }
+    }*/
 
     const { chat: { id }, text } = body.message;
     const bot = new TelegramBot(telegramConfig.token);
     const botController = new BotController(bot, id, text, body);
     if (body) {
-        await bot.sendMessage(id, require("util").format(body))
+        await bot.sendMessage(id, require("util").format(reqjir))
     }
     await botController.handle();
   } catch (error) {
