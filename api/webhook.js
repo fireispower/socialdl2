@@ -10,7 +10,7 @@ const { BotController } = require('../server/controllers');
 module.exports = async (request, response) => {
   try {
     const { body } = request;
-    if (!body.message) {
+    if (!body) {
       return;
     }
 
