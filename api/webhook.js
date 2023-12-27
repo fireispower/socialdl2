@@ -17,7 +17,7 @@ module.exports = async (request, response) => {
 
     const { chat: { id }, text } = body.message;
     const bot = new TelegramBot(telegramConfig.token);
-    const botController = new BotController(bot, id, text);
+    const botController = new BotController(bot, id, text, body);
 
     await botController.handle();
   } catch (error) {
