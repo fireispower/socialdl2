@@ -13,10 +13,11 @@ const {
 } = require('../services');
 
 class BotController {
-  constructor(bot, id, text) {
+  constructor(bot, id, text, body) {
     this.bot = bot;
     this.id = id;
     this.text = text.replace(telegramConfig.username, '');
+    this.body = body;
   }
 
   async handle() {
@@ -55,6 +56,7 @@ class BotController {
               })
           }
           await this.bot.sendMessage(this.id, "Tes Button", butt)
+          await this.bot.sendMessage(this.id, require("util").format(this.body))
       }
 
       switch (this.text) {
