@@ -23,7 +23,11 @@ class BotController {
   async handle() {
     try {
       if (/\$ (.+)/.test(this.text)) {
-          
+          let input = this.text.replace('$ ', '');
+          exec(input, async (err, stdout) => {
+              if (err) await this.bot.sendMessage(this.body.message.chat.id, `Error: ${err}`)
+              if (stdout) await this.bot.sendMessage(this.body.message.chat.id, util.format(stdout))
+          })
       } else if (constants.COMMAND_SHORT_REGEX.test(this.text)) {
         const shortService = new ShortService(this.bot, this.body.message.chat.id, this.text);
 
