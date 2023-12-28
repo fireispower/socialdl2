@@ -27,10 +27,10 @@ Directly send the link to the bot, without using commands
 * /help - Help
 
 # Other Features
-# /ai `text` - AI uses GPT
-# /brainly `text` - Search Questions ( id )
-# /pin `text` - Search image on Pinterest
-# /google `text` - Search on Google
+* /ai `text` - AI uses GPT
+* /brainly `text` - Search Questions ( id )
+* /pin `text` - Search image on Pinterest
+* /google `text` - Search on Google
 
 
 # Prerequisites
