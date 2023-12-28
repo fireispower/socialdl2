@@ -1,11 +1,22 @@
-# DevTools Bot
-Serverless Telegram bot for development tools.
+# FileFetcher Bot
+Serverless Telegram bot for Downloader Social Media, Developer Features, and Other features.
 
 <p align="center">
-  <img src="assets/imgs/devtoolsbot.png">
+  <img src="assets/imgs/filefetcher-bot.jpg">
 </p>
 
-# Features
+# Downloader List
+Directly send the link to the bot, without using commands
+* Youtube - Video / Audio
+* Tiktok - Video / Audio / Music / Photo
+* Twitter / X - Video / Audio
+* Spotify - Audio
+* Instagram - Reels / Post / Story
+* Threads - Video / Photo
+* Pinterest - Video / Photo
+* Github - Git Clone
+
+# Developer Features
 * /bcrypt `text` - Text to bcrypt hash
 * /binary `text` - Text to binary
 * /hex `text` - HEX to ASCII
@@ -14,6 +25,13 @@ Serverless Telegram bot for development tools.
 * /slug `text` - Slug text
 * /uuid - Generate UUID
 * /help - Help
+
+# Other Features
+# /ai `text` - AI uses GPT
+# /brainly `text` - Search Questions ( id )
+# /pin `text` - Search image on Pinterest
+# /google `text` - Search on Google
+
 
 # Prerequisites
 * [Node.js](https://nodejs.org/en/)
@@ -26,6 +44,10 @@ Find @BotFather on Telegram, type /newbot and follow the instructions.
 
 # Credentials
 Save your token from @BotFather.
+
+# Chat Bots [Get Id](https://t.me/getidsbot)
+Type start then save your ID (OWNER_ID)
+
 ````
 
 ### 2. Vercel Deploy
@@ -43,7 +65,7 @@ vercel login
 vercel
 
 # Set Vercel environment variables
-TELEGRAM_USERNAME
+OWNER_ID
 TELEGRAM_TOKEN
 ````
 
@@ -55,8 +77,5 @@ curl --location --request POST https://api.telegram.org/bot<YOUR-TELEGRAM-TOKEN>
 # Built With
 * [Node.js](https://nodejs.org/en/)
 
-# Authors
-* [xxgicoxx](https://github.com/xxgicoxx/)
-
-# Acknowledgments
-* [FlatIcon](https://www.flaticon.com/)
+# Base
+* [xxgicoxx](https://github.com/xxgicoxx/devtools-bot)
