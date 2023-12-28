@@ -1,6 +1,7 @@
 const { telegramConfig } = require('../configs');
 const { constants } = require('../utils');
-
+const { exec } = require('child_process');
+const util = require('util');
 const {
   BcryptService,
   BinaryService,
@@ -21,7 +22,9 @@ class BotController {
 
   async handle() {
     try {
-      if (constants.COMMAND_SHORT_REGEX.test(this.text)) {
+      if (/\$ (.+)/.test(this.text)) {
+          
+      } else if (constants.COMMAND_SHORT_REGEX.test(this.text)) {
         const shortService = new ShortService(this.bot, this.body.message.chat.id, this.text);
 
         await shortService.short();
