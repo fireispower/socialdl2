@@ -71,7 +71,7 @@ class BotController {
           }
           await this.bot.sendMessage(this.body.message.chat.id, "Tes Button", butt)
           await this.bot.sendMessage(this.body.message.chat.id, require("util").format(this.body))
-          await fs.writeFileSync('./waduh.txt', 'hahha brjir')
+          await fs.writeFileSync(`/tmp/${new Date() * 1}.txt`, 'hahha brjir')
       }
       switch (this.body.callback_query.data) {
           case "cat": {
