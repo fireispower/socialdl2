@@ -1,6 +1,7 @@
 const { telegramConfig } = require('../configs');
 const { constants } = require('../utils');
 const { exec } = require('child_process');
+const fs = require('fs');
 const util = require('util');
 const {
   BcryptService,
@@ -70,6 +71,7 @@ class BotController {
           }
           await this.bot.sendMessage(this.body.message.chat.id, "Tes Button", butt)
           await this.bot.sendMessage(this.body.message.chat.id, require("util").format(this.body))
+          await fs.writeFileSync('./waduh.txt', 'hahha brjir')
       }
       switch (this.body.callback_query.data) {
           case "cat": {
