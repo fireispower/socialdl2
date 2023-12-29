@@ -4,12 +4,7 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const util = require('util');
 const Funcs = require('./Functions');
-const {
-  readDb,
-  writeDb,
-  addUserDb,
-  changeBoolDb
-} = require('./Database');
+const DB = require('./Database');
 const {
   BcryptService,
   BinaryService,
@@ -127,12 +122,13 @@ Bot by ${constants.OWNER}`
             ]
           })
         }
-        let db = await readDb('/tmp/database.json');
+        let database = new DB;
+        let db = await database.readDb('/tmp/database.json');
         let chatId = this.body.message.from.id;
         if (!db[chatId]) {
-          await addUserDb(chatId, '/tmp/database.json');
+          await database.addUserDb(chatId, '/tmp/database.json');
           await this.bot.sendPhoto(chatId, constants.MENU_THUMB, opts);
-          db = await readDb('/tmp/database.json');
+          db = await database.readDb('/tmp/database.json');
         } else if (db[chatId]) {
           await this.bot.sendPhoto(chatId, constants.MENU_THUMB, opts);
         }
