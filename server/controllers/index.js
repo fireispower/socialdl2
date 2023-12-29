@@ -5,13 +5,7 @@ const {
   addUserDb,
   changeBoolDb
 } = require('./Database');
-const {
-  getBuffer,
-  htmlToText,
-  filterAlphanumericWithDash,
-  getRandom,
-  getBanned
-} = require('./Functions');
+const Funcs = require('./Functions');
 
 module.exports = {
   BotController,
@@ -19,9 +13,5 @@ module.exports = {
   writeDb,
   addUserDb,
   changeBoolDb,
-  getBuffer,
-  htmlToText,
-  filterAlphanumericWithDash,
-  getRandom,
-  getBanned
-};
+  Funcs
+}
