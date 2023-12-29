@@ -3,7 +3,7 @@ const { constants } = require('../utils');
 const { exec } = require('child_process');
 const fs = require('fs');
 const util = require('util');
-const { getBanned } = require('./Functions');
+const Funcs = require('./Functions');
 const {
   readDb,
   writeDb,
@@ -85,7 +85,8 @@ class BotController {
 
         await binaryService.binary();
       } else if (/\/(help|start|menu)/.test(this.text)) {
-        let getban = await getBanned(this.body.message.from.id);
+        let Funcc = new Funcs;
+        let getban = await Funcc.getBanned(this.body.message.from.id);
         if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
   let response = `Hello I am ${constants.BOTNAME}
 
