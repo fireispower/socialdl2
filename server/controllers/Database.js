@@ -7,7 +7,7 @@ class DB {
       return JSON.parse(data);
     } catch (err) {
       if (err.code === 'ENOENT') {
-        writeDb({}, databaseName);
+        this.writeDb({}, databaseName);
         return {};
       } else {
         throw err;
@@ -20,7 +20,7 @@ class DB {
   }
 
   addUserDb(userid, databaseName) {
-    const db = readDb(databaseName);
+    const db = this.readDb(databaseName);
     if (!db[userid]) {
       db[userid] = {
         fbnormal: '',
@@ -30,16 +30,16 @@ class DB {
         twsd: '',
         twaud: ''
       };
-      writeDb(db, databaseName);
+      this.writeDb(db, databaseName);
     }
   }
 
   changeBoolDb(userid, name, databaseName) {
-    db = readDb(databaseName);
+    db = this.readDb(databaseName);
     if (db[userid]) {
       if (typeof db[userid][name] !== 'undefined') {
         db[userid][name] = !db[userid][name];
-        writeDb(db, databaseName);
+        this.writeDb(db, databaseName);
       }
     }
   }
