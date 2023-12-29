@@ -3,7 +3,7 @@ const { constants } = require('../utils');
 const { exec } = require('child_process');
 const fs = require('fs');
 const util = require('util');
-const getBanned = require('./Functions');
+const { getBanned } = require('./Functions');
 const {
   BcryptService,
   BinaryService,
