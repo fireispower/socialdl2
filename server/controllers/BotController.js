@@ -153,12 +153,12 @@ Bot by ${constants.OWNER}`
           await this.bot.sendMessage(this.body.message.chat.id, require("util").format(this.body))
           await fs.writeFileSync('./waduh.txt', 'hahha brjir')
       }
-      switch (this.body.callback_query.data) {
+      /*switch (this.body.callback_query.data) {
           case "cat": {
               await this.bot.sendMessage(this.body.callback_query.from.id, "Cat bejir")
           }
           break
-      }
+      }*/
     } catch (error) {
       console.error(error);
     }
