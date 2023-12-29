@@ -5,6 +5,12 @@ const fs = require('fs');
 const util = require('util');
 const { getBanned } = require('./Functions');
 const {
+  readDb,
+  writeDb,
+  addUserDb,
+  changeBoolDb
+} = require('./Database');
+const {
   BcryptService,
   BinaryService,
   HexService,
