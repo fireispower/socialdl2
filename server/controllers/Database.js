@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 class DB {
-  function readDb(databaseName) {
+  readDb(databaseName) {
     try {
       let data = fs.readFileSync(databaseName, 'utf8');
       return JSON.parse(data);
@@ -15,11 +15,11 @@ class DB {
     }
   }
 
-  function writeDb(db, databaseName) {
+  writeDb(db, databaseName) {
     fs.writeFileSync(databaseName, JSON.stringify(db, null, 2), 'utf8');
   }
 
-  function addUserDb(userid, databaseName) {
+  addUserDb(userid, databaseName) {
     const db = readDb(databaseName);
     if (!db[userid]) {
       db[userid] = {
@@ -34,7 +34,7 @@ class DB {
     }
   }
 
-  function changeBoolDb(userid, name, databaseName) {
+  changeBoolDb(userid, name, databaseName) {
     db = readDb(databaseName);
     if (db[userid]) {
       if (typeof db[userid][name] !== 'undefined') {
