@@ -19,7 +19,7 @@ module.exports = Object.freeze({
   COMMAND_BRAINLY: '/brainly ',
   COMMAND_PINTEREST_S: '/pin ',
   
-  COMMAND_AI_REGEX: /\/ai (.+)/,
+  COMMAND_AI_REGEX: /\/ai (.+)?/,
   COMMAND_GOOGLE_REGEX: /\/google (.+)/,
   COMMAND_BRAINLY_REGEX: /\/brainly (.+)/,
   COMMAND_FACEBOOK_REGEX: /^https?:\/\/(www\.)?(m\.)?facebook\.com\/.+/,
