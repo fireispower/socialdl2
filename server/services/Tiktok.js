@@ -2,7 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const util = require('util');
-const Funcs = require('../controllers');
+const Funcs = require('../controllers/Functions');
 const Func = new Funcs;
 
 class Tiktok {
