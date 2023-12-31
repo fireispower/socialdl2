@@ -127,7 +127,7 @@ Bot by ${constants.OWNER}`
         let input = this.text.replace(constants.COMMAND_AI, '');
         let AI = new Ai;
         await AI.getAiResponse(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '')
-      } else if (constats.COMMAND_GOOGLE_REGEX.test(this.text)) {
+      } else if (constants.COMMAND_GOOGLE_REGEX.test(this.text)) {
           let input = this.text.replace(constants.COMMAND_GOOGLE, '');
           let Googlee = new Google;
           await Google.googleSearch(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '');
