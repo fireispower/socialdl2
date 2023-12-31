@@ -1,80 +1,41 @@
-const BcryptService = require('./BcryptService');
-const BinaryService = require('./BinaryService');
-const HexService = require('./HexService');
-const MD5Service = require('./MD5Service');
-const ShortService = require('./ShortService');
-const SlugService = require('./SlugService');
-const UUIDService = require('./UUIDService');
-const getAiResponse = require('./Ai');
-const getBrainlyAnswer = require('./Brainly');
-const {
-  getFacebook,
-  getFacebookNormal,
-  getFacebookHD,
-  getFacebookAudio
-} = require('./Facebook');
-const gitClone = require('./Github');
-const googleSearch = require('./Google');
-const downloadInstagram = require('./Instagram');
-const {
-  pinterest,
-  pinSearch
-} = require('./Pinterest');
-const {
-  getPlaylistSpotify,
-  getAlbumsSpotify,
-  getSpotifySong
-} = require('./Spotify');
-const threadsDownload = require('./Threads');
-const {
-  getTiktokInfo,
-  tiktokVideo,
-  tiktokAudio,
-  tiktokSound
-} = require('./Tiktok');
-const {
-  getDataTwitter,
-  downloadTwitterHigh,
-  downloadTwitterLow,
-  downloadTwitterAudio
-} = require('./Twitter');
-const {
-  getYoutube,
-  getYoutubeVideo,
-  getYoutubeAudio
-} = require('./Youtube');
+const Bcrypt = require('./Bcrypt');
+const Binary = require('./Binary');
+const Hex = require('./Hex');
+const MD5 = require('./MD5');
+const Short = require('./Short');
+const Slug = require('./Slug');
+const UUID = require('./UUID');
+const Ai = require('./Ai');
+const BrainLy = require('./Brainly');
+const FB = require('./Facebook');
+const Github = require('./Github');
+const Google = require('./Google');
+const Instagram = require('./Instagram');
+const Pinterest = require('./Pinterest');
+const Spotify = require('./Spotify');
+const Threads = require('./Threads');
+const Tiktok = require('./Tiktok');
+const X = require('./X');
+const Youtube = require('./Youtube');
 
 module.exports = {
-  BcryptService,
-  BinaryService,
-  HexService,
-  MD5Service,
-  ShortService,
-  SlugService,
-  UUIDService,
-  getAiResponse,
-  getBrainlyAnswer,
-  getFacebook,
-  getFacebookNormal,
-  getFacebookHD,
-  getFacebookAudio,
-  googleSearch,
-  downloadInstagram,
-  pinterest,
-  pinSearch,
-  getPlaylistSpotify,
-  getAlbumsSpotify,
-  getSpotifySong,
-  threadsDownload,
-  getTiktokInfo,
-  tiktokVideo,
-  tiktokAudio,
-  tiktokSound,
-  getDataTwitter,
-  downloadTwitterHigh,
-  downloadTwitterLow,
-  downloadTwitterAudio,
-  getYoutube,
-  getYoutubeVideo,
-  getYoutubeAudio
+  Bcrypt,
+  Binary,
+  Hex,
+  MD5,
+  Short,
+  Slug,
+  UUID,
+  Ai,
+  BrainLy,
+  FB,
+  Github,
+  Google,
+  Instagram,
+  Pinterest,
+  Spotify,
+  Threads,
+  Tiktok,
+  X,
+  Youtube
 };

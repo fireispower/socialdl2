@@ -78,35 +78,35 @@ const Brainly = async (query, count = 10) => {
   });
 };
 
-async function getBrainlyAnswer(bot, chatId, input, userName) {
-  if (!input) return bot.sendMessage(chatId, `Masukkan soal atau pertanyaan yang mau kamu cari di brainly, contoh\n/brainly berapa letak geografis indonesia`);
-  try {
-    bot.sendChatAction(chatId, 'typing');
-    let getdata = await Brainly(input, 10);
-    let results = ``;
-    if (getdata.success) {
-      const results = getdata.data.map(mil => {
-        const jawabanArray = mil.jawaban.map(j => '• ' + j.text);
-        const jawabanString = jawabanArray.join('\n');
-        return `Pertanyaan: ${mil.pertanyaan.trim()}\nJawaban:\n${jawabanString.trim()}`;
-      }).join('\n═════════════════════\n');
-
-      const chunkSize = 2500;
-      for (let i = 0; i < results.length; i += chunkSize) {
-        const chunk = results.substring(i, i + chunkSize);
-        await bot.sendMessage(chatId, chunk, {
-          disable_web_page_preview: true
-        });
+class BrainLy {
+  async getBrainlyAnswer(bot, chatId, input, userName) {
+    if (!input) return bot.sendMessage(chatId, `Masukkan soal atau pertanyaan yang mau kamu cari di brainly, contoh\n/brainly berapa letak geografis indonesia`);
+    try {
+      bot.sendChatAction(chatId, 'typing');
+      let getdata = await Brainly(input, 10);
+      let results = ``;
+      if (getdata.success) {
+        const results = getdata.data.map(mil => {
+          const jawabanArray = mil.jawaban.map(j => '• ' + j.text);
+          const jawabanString = jawabanArray.join('\n');
+          return `Pertanyaan: ${mil.pertanyaan.trim()}\nJawaban:\n${jawabanString.trim()}`;
+        }).join('\n═════════════════════\n');
+  
+        const chunkSize = 2500;
+        for (let i = 0; i < results.length; i += chunkSize) {
+          const chunk = results.substring(i, i + chunkSize);
+          await bot.sendMessage(chatId, chunk, {
+            disable_web_page_preview: true
+          });
+        }
+      } else if (!getdata.success) {
+        return bot.sendMessage(chatId, 'Data not found');
       }
-    } else if (!getdata.success) {
-      return bot.sendMessage(chatId, 'Data not found');
+    } catch (err) {
+      await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getBrainlyAnswer()\n• Input: ${input}\n\n${err}`.trim());
+      return bot.sendMessage(chatId, 'An error occurred!');
     }
-  } catch (err) {
-    await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: @${userName}\n• Function: getBrainlyAnswer()\n• Input: ${input}\n\n${err}`.trim());
-    return bot.sendMessage(chatId, 'An error occurred!');
   }
 }
 
-module.exports = {
-  getBrainlyAnswer
-}
+module.exports = BrainLy

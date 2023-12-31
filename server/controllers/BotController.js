@@ -4,41 +4,30 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const util = require('util');
 const Funcs = require('./Functions');
+const Func = new Funcs;
 const DB = require('./Database');
 const {
-  BcryptService,
-  BinaryService,
-  HexService,
-  MD5Service,
-  ShortService,
-  SlugService,
-  UUIDService,
-  getAiResponse,
-  getBrainlyAnswer,
-  getFacebook,
-  getFacebookNormal,
-  getFacebookHD,
-  getFacebookAudio,
-  googleSearch,
-  downloadInstagram,
-  pinterest,
-  pinSearch,
-  getPlaylistSpotify,
-  getAlbumsSpotify,
-  getSpotifySong,
-  threadsDownload,
-  getTiktokInfo,
-  tiktokVideo,
-  tiktokAudio,
-  tiktokSound,
-  getDataTwitter,
-  downloadTwitterHigh,
-  downloadTwitterLow,
-  downloadTwitterAudio,
-  getYoutube,
-  getYoutubeVideo,
-  getYoutubeAudio
+  Bcrypt,
+  Binary,
+  Hex,
+  MD5,
+  Short,
+  Slug,
+  UUID,
+  Ai,
+  BrainLy,
+  FB,
+  Github,
+  Google,
+  Instagram,
+  Pinterest,
+  Spotify,
+  Threads,
+  Tiktok,
+  X,
+  Youtube
 } = require('../services');
+let userLocks = {};
 
 class BotController {
   constructor(bot, body) {
@@ -56,32 +45,31 @@ class BotController {
               if (stdout) await this.bot.sendMessage(this.body.message.chat.id, util.format(stdout))
           })
       } else if (constants.COMMAND_SHORT_REGEX.test(this.text)) {
-        const shortService = new ShortService(this.bot, this.body.message.chat.id, this.text);
+        const short = new Short(this.bot, this.body.message.chat.id, this.text);
 
-        await shortService.short();
+        await short.short();
       } else if (constants.COMMAND_SLUG_REGEX.test(this.text)) {
-        const slugService = new SlugService(this.bot, this.body.message.chat.id, this.text);
+        const slug = new Slug(this.bot, this.body.message.chat.id, this.text);
 
-        await slugService.slug();
+        await slug.slug();
       } else if (constants.COMMAND_HEX_REGEX.test(this.text)) {
-        const hexService = new HexService(this.bot, this.body.message.chat.id, this.text);
+        const hex = new Hex(this.bot, this.body.message.chat.id, this.text);
 
-        await hexService.hex();
+        await hex.hex();
       } else if (constants.COMMAND_MD5_REGEX.test(this.text)) {
-        const mD5Service = new MD5Service(this.bot, this.body.message.chat.id, this.text);
+        const mD5 = new MD5(this.bot, this.body.message.chat.id, this.text);
 
-        await mD5Service.md5();
+        await mD5.md5();
       } else if (constants.COMMAND_BCRYPT_REGEX.test(this.text)) {
-        const bcryptService = new BcryptService(this.bot, this.body.message.chat.id, this.text);
+        const bcrypt = new Bcrypt(this.bot, this.body.message.chat.id, this.text);
 
-        await bcryptService.bcrypt();
+        await bcrypt.bcrypt();
       } else if (constants.COMMAND_BINARY_REGEX.test(this.text)) {
-        const binaryService = new BinaryService(this.bot, this.body.message.chat.id, this.text);
+        const binary = new Binary(this.bot, this.body.message.chat.id, this.text);
 
-        await binaryService.binary();
+        await binary.binary();
       } else if (/\/(help|start|menu)/.test(this.text)) {
-        let Funcc = new Funcs;
-        let getban = await Funcc.getBanned(this.body.message.from.id);
+        let getban = await Func.getBanned(this.body.message.from.id);
         if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
   let response = `Hello I am ${constants.BOTNAME}
 
@@ -133,28 +121,302 @@ Bot by ${constants.OWNER}`
           await this.bot.sendPhoto(chatId, constants.MENU_THUMB, opts);
         }
       } else if (constants.COMMAND_UUID_REGEX.test(this.text)) {
-          const uUIDService = new UUIDService(this.bot, this.body.message.chat.id, this.text);
-          await uUIDService.uuid();
-      } else if (/(but|button)/.test(this.text)) {
-          let butt = {
-              caption: "button",
-              reply_markup: JSON.stringify({
-                  inline_keyboard: [
-                      [{text: "Kucing", callback_data: "cat"}],
-                      [{text: "Anjing", callback_data: "dog"}]
-                  ]
-              })
-          }
-          await this.bot.sendMessage(this.body.message.chat.id, "Tes Button", butt)
-          await this.bot.sendMessage(this.body.message.chat.id, require("util").format(this.body))
-          await fs.writeFileSync('./waduh.txt', 'hahha brjir')
+          const uUID = new UUID(this.bot, this.body.message.chat.id, this.text);
+          await uUID.uuid();
+      } else if (constants.COMMAND_AI.test(this.text)) {
+        let input = this.text.replace(constants.COMMAND_AI, '');
+        let AI = new Ai;
+        await AI.getAiResponse(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '')
+      } else if (constats.COMMAND_GOOGLE_REGEX.test(this.text)) {
+          let input = this.text.replace(constants.COMMAND_GOOGLE, '');
+          let Googlee = new Google;
+          await Google.googleSearch(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '');
+      } else if (constants.COMMAND_BRAINLY_REGEX.test(this.text)) {
+          let input = this.text.replace(constants.COMMAND_BRAINLY, '');
+          let BRainly = new Brainly;
+          await BRainly.getBrainlyAnswer(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '');
+      } else if (constants.COMMAND_PINTEREST_S_REGEX.test(this.text)) {
+          let input = this.text.replace(constants.COMMAND_PINTEREST_S, '');
+          let Pint = new Pinterest;
+          await Pint.pinSearch(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '');
+      } else if (constants.COMMAND_TIKTOK_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let TT = new Tiktok;
+          await TT.getTiktokInfo(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '');
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_X_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let Xx = new X;
+          await Xx.getDatax(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '');
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_INSTAGRAM_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let IG = new Instagram;
+          await IG.downloadInstagram(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '');
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_PINTEREST_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let Pin = new Pinterest;
+          await Pinterest.pinterest(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '');
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_SPOTIFY_TRACK_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let Spot = new Spotify;
+          await Spot.getSpotifySong(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_SPOTIFY_ALBUM_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let Spot = new Spotify;
+          await Spot.getAlbumsSpotify(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_SPOTIFY_PLAYLIST_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let Spot = new Spotify;
+          await Spot.getPlaylistSpotify(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_YOUTUBE_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          if (match[0].includes("/live/")) return this.bot.sendMessage(this.body.message.chat.id, `Cannot download livestream video`)
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let YT = new Youtube;
+          await YT.getYoutube(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_FACEBOOK_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let Faceebook = new FB;
+          await Faceebook.getFacebook(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_THREADS_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let Th = new Threads;
+          await Threads.threadsDownload(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (constants.COMMAND_GITHUB_REGEX.test(this.text)) {
+        let getban = await Func.getBanned(this.body.message.from.id);
+        if (!getban.status) return this.bot.sendMessage(this.body.message.chat.id, `You have been banned\n\nReason : ${getban.reason}\n\nDo you want to be able to use bots again? Please contact the owner to request removal of the ban\nOwner : ${constants.OWNER}`)
+        let userId = this.body.message.from.id.toString();
+        if (userLocks[userId]) {
+          return;
+        }
+        userLocks[userId] = true;
+        try {
+          await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
+          let Git = new Github;
+          await Github.Clone(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+        } finally {
+          userLocks[userId] = false;
+        }
+      } else if (this.body.callback_query.data.startsWith('tta')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let 
+        let TT = new Tiktok;
+        await TT.tiktokAudio(this.bot, chatid, url, usrnm);
+      } else if (this.body.callback_query.data.startsWith('ttv')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let TT = new Tiktok;
+        await TT.tiktokVideo(this.bot, chatid, url, usrnm);
+      } else if (this.body.callback_query.data.startsWith('tts')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let TT = new Tiktok;
+        await TT.tiktokSound(this.bot, chatid, url, usrnm);
+      } else if (this.body.callback_query.data.startsWith('twh')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let XDL = new X;
+        await X.downloadxHigh(this.bot, chatid, usrnm);
+      } else if (this.body.callback_query.data.startsWith('twl')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let XDL = new X;
+        await X.downloadxLow(this.bot, chatid, usrnm);
+      } else if (this.body.callback_query.data.startsWith('twa')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let XDL = new X;
+        await X.downloadxAudio(this.bot, chatid, usrnm);
+      } else if (this.body.callback_query.data.startsWith('spt')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let Spot = new Spotify;
+        await Spot.getSpotifySong(this.bot, chatid, url, usrnm);
+      } else if (this.body.callback_query.data.startsWith('fbn')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let Febe = new FB;
+        await Febe.getFacebookNormal(this.bot, chatid, usrnm);
+      } else if (this.body.callback_query.data.startsWith('fbh')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let Febe = new FB;
+        await Febe.getFacebookHD(this.bot, chatid, usrnm);
+      } else if (this.body.callback_query.data.startsWith('fba')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let Febe = new FB;
+        await Febe.getFacebookAudio(this.bot, chatid, usrnm);
+      } else if (this.body.callback_query.data.startsWith('ytv')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let args = url.split(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let Yt = new Youtube;
+        await Yt.getYoutubeVideo(this.bot, chatid, args[0], args[1], usrnm);
+      } else if (this.body.callback_query.data.startsWith('yta')) {
+        let data = this.body.callback_query.data;
+        let url = data.split(' ').slice(1).join(' ');
+        let args = url.split(' ');
+        let chatid = this.body.callback_query.message.chat.id;
+        let msgid = this.body.callback_query.message.message_id;
+        let usrnm = this.body.callback_query.message.chat.username;
+        await this.bot.deleteMessage(chatid, msgid);
+        let Yt = new Youtube;
+        await Yt.getYoutubeAudio(this.bot, chatid, args[0], args[1], usrnm);
       }
-      /*switch (this.body.callback_query.data) {
-          case "cat": {
-              await this.bot.sendMessage(this.body.callback_query.from.id, "Cat bejir")
-          }
-          break
-      }*/
     } catch (error) {
       console.error(error);
     }
