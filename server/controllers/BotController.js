@@ -312,7 +312,6 @@ Bot by ${constants.OWNER}`
         let msgid = this.body.callback_query.message.message_id;
         let usrnm = this.body.callback_query.message.chat.username;
         await this.bot.deleteMessage(chatid, msgid);
-        let 
         let TT = new Tiktok;
         await TT.tiktokAudio(this.bot, chatid, url, usrnm);
       } else if (this.body.callback_query.data.startsWith('ttv')) {
