@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const util = require('util');
-const Funcs = require('../controllers');
+const Funcs = require('../controllers/Functions');
 const Func = new Funcs;
 const { Y2MateClient } = require('y2mate-api');
 const client = new Y2MateClient();
