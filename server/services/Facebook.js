@@ -3,7 +3,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const DB = require('../controllers/Database');
 const Databs = new DB;
-const Funcs = require('../controllers');
+const Funcs = require('../controllers/Functions');
 const Func = new Funcs;
 const util = require('util');
 
