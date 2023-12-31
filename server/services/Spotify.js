@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { parse } = require('spotify-uri');
 const util = require('util');
-const Funcs = require('../controllers');
+const Funcs = require('../controllers/Functions');
 const Func = new Funcs
 const fs = require('fs');
 
