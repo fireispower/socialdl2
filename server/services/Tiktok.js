@@ -165,7 +165,7 @@ class Tiktok {
   }
   
   async tiktokVideo(bot, chatId, url, userName) {
-    load = await bot.sendMessage(chatId, 'Downloading video...');
+    let load = await bot.sendMessage(chatId, 'Downloading video...');
     try {
       let get = await this.tiktokdl('https://www.tiktok.com/@' + url);
       let fname = `tiktok_video_${get.username}-${chatId}.mp4`;
@@ -182,7 +182,7 @@ class Tiktok {
   }
   
   async tiktokAudio(bot, chatId, url, userName) {
-    load = await bot.sendMessage(chatId, 'Downloading audio...');
+    let load = await bot.sendMessage(chatId, 'Downloading audio...');
     try {
       let get = await this.tiktokdl('https://www.tiktok.com/@' + url);
       let fname = `tiktok_audio_${get.username}-${chatId}.mp3`;
@@ -199,7 +199,7 @@ class Tiktok {
   }
   
   async tiktokSound(bot, chatId, url, userName) {
-    load = await bot.sendMessage(chatId, 'Downloading audio...');
+    let load = await bot.sendMessage(chatId, 'Downloading audio...');
     try {
       let get2 = await this.ttembed('https://www.tiktok.com/@' + url)
       let get = await this.tiktokdl('https://www.tiktok.com/music/' + get2.sound)
