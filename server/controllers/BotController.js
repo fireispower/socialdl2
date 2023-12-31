@@ -305,7 +305,7 @@ Bot by ${constants.OWNER}`
         } finally {
           userLocks[userId] = false;
         }
-      } else if (this.body.callback_query.data.startsWith('tta')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('tta')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -314,7 +314,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let TT = new Tiktok;
         await TT.tiktokAudio(this.bot, chatid, url, usrnm);
-      } else if (this.body.callback_query.data.startsWith('ttv')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('ttv')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -323,7 +323,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let TT = new Tiktok;
         await TT.tiktokVideo(this.bot, chatid, url, usrnm);
-      } else if (this.body.callback_query.data.startsWith('tts')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('tts')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -332,7 +332,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let TT = new Tiktok;
         await TT.tiktokSound(this.bot, chatid, url, usrnm);
-      } else if (this.body.callback_query.data.startsWith('twh')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('twh')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -341,7 +341,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let XDL = new X;
         await X.downloadxHigh(this.bot, chatid, usrnm);
-      } else if (this.body.callback_query.data.startsWith('twl')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('twl')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -350,7 +350,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let XDL = new X;
         await X.downloadxLow(this.bot, chatid, usrnm);
-      } else if (this.body.callback_query.data.startsWith('twa')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('twa')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -359,7 +359,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let XDL = new X;
         await X.downloadxAudio(this.bot, chatid, usrnm);
-      } else if (this.body.callback_query.data.startsWith('spt')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('spt')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -368,7 +368,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let Spot = new Spotify;
         await Spot.getSpotifySong(this.bot, chatid, url, usrnm);
-      } else if (this.body.callback_query.data.startsWith('fbn')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('fbn')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -377,7 +377,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let Febe = new FB;
         await Febe.getFacebookNormal(this.bot, chatid, usrnm);
-      } else if (this.body.callback_query.data.startsWith('fbh')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('fbh')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -386,7 +386,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let Febe = new FB;
         await Febe.getFacebookHD(this.bot, chatid, usrnm);
-      } else if (this.body.callback_query.data.startsWith('fba')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('fba')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let chatid = this.body.callback_query.message.chat.id;
@@ -395,7 +395,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let Febe = new FB;
         await Febe.getFacebookAudio(this.bot, chatid, usrnm);
-      } else if (this.body.callback_query.data.startsWith('ytv')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('ytv')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let args = url.split(' ');
@@ -405,7 +405,7 @@ Bot by ${constants.OWNER}`
         await this.bot.deleteMessage(chatid, msgid);
         let Yt = new Youtube;
         await Yt.getYoutubeVideo(this.bot, chatid, args[0], args[1], usrnm);
-      } else if (this.body.callback_query.data.startsWith('yta')) {
+      } else if (!this.text && this.body.callback_query.data.startsWith('yta')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
         let args = url.split(' ');
