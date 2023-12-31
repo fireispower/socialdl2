@@ -123,7 +123,7 @@ Bot by ${constants.OWNER}`
       } else if (constants.COMMAND_UUID_REGEX.test(this.text)) {
           const uUID = new UUID(this.bot, this.body.message.chat.id, this.text);
           await uUID.uuid();
-      } else if (constants.COMMAND_AI.test(this.text)) {
+      } else if (constants.COMMAND_AI_REGEX.test(this.text)) {
         let input = this.text.replace(constants.COMMAND_AI, '');
         let AI = new Ai;
         await AI.getAiResponse(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '')
