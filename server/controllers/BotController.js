@@ -210,7 +210,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Spot = new Spotify;
-          await Spot.getSpotifySong(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+          await Spot.getSpotifySong(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
@@ -225,7 +225,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Spot = new Spotify;
-          await Spot.getAlbumsSpotify(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+          await Spot.getAlbumsSpotify(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
@@ -240,7 +240,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Spot = new Spotify;
-          await Spot.getPlaylistSpotify(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+          await Spot.getPlaylistSpotify(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
@@ -253,10 +253,10 @@ Bot by ${constants.OWNER}`
         }
         userLocks[userId] = true;
         try {
-          if (match[0].includes("/live/")) return this.bot.sendMessage(this.body.message.chat.id, `Cannot download livestream video`)
+          if (this.text.includes("/live/")) return this.bot.sendMessage(this.body.message.chat.id, `Cannot download livestream video`)
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let YT = new Youtube;
-          await YT.getYoutube(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+          await YT.getYoutube(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
@@ -271,7 +271,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Faceebook = new FB;
-          await Faceebook.getFacebook(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+          await Faceebook.getFacebook(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
@@ -286,7 +286,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Th = new Threads;
-          await Threads.threadsDownload(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+          await Threads.threadsDownload(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
@@ -301,7 +301,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Git = new Github;
-          await Github.Clone(this.bot, this.body.message.chat.id, match[0], this.body.message.from.username ? this.body.message.from.username : '')
+          await Github.Clone(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
