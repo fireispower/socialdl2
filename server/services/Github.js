@@ -1,5 +1,5 @@
 let fs = require('fs')
-let Funcs = require('../controllers');
+let Funcs = require('../controllers/Functions');
 let Func = new Funcs;
 let regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
 class Github {
