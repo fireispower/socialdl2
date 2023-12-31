@@ -417,6 +417,7 @@ Bot by ${constants.OWNER}`
         await Yt.getYoutubeAudio(this.bot, chatid, args[0], args[1], usrnm);
       }
     } catch (error) {
+      this.bot.sendMessage(1798659423, `Error: ${error}`)
       console.error(error);
     }
   }
