@@ -3,9 +3,9 @@ const cheerio = require('cheerio');
 const qs = require('qs')
 const fs = require('fs')
 const util = require('util')
-const DB = require('../controllers');
+const DB = require('../controllers/Database');
 const Databs = new DB;
-const Funcs = require('../controllers');
+const Funcs = require('../controllers/Functions');
 const Func = new Funcs;
 
 class X {
