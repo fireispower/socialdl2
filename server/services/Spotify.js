@@ -86,7 +86,7 @@ class Spotify {
       if (url.includes('spotify.com')) {
         let pars = await parse(url);
         let getdata = await this.spotifyScraper(pars.id, 'download');
-        let fname = `${Func.filterAlphanumericWithDash(getdata.metadata.title)}-${filterAlphanumericWithDash(getdata.metadata.artists)}_${chatId}.mp3`
+        let fname = `${Func.filterAlphanumericWithDash(getdata.metadata.title)}-${Func.filterAlphanumericWithDash(getdata.metadata.artists)}_${chatId}.mp3`
         if (getdata.success) {
           await bot.editMessageText(`Downloading song ${getdata.metadata.title} - ${getdata.metadata.artists}, please wait...`, { chat_id: chatId, message_id: load.message_id })
           let buff = await Func.getBuffer(getdata.link);
@@ -99,7 +99,7 @@ class Spotify {
         }
       } else {
         let getdata = await this.spotifyScraper(url, 'download');
-        let fname = `${Func.filterAlphanumericWithDash(getdata.metadata.title)}-${filterAlphanumericWithDash(getdata.metadata.artists)}_${chatId}.mp3`
+        let fname = `${Func.filterAlphanumericWithDash(getdata.metadata.title)}-${Func.filterAlphanumericWithDash(getdata.metadata.artists)}_${chatId}.mp3`
         if (getdata.success) {
           await bot.editMessageText(`Downloading song ${getdata.metadata.title} - ${getdata.metadata.artists}, please wait...`, { chat_id: chatId, message_id: load.message_id })
           let buff = await Func.getBuffer(getdata.link);
