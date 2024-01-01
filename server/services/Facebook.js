@@ -88,7 +88,7 @@ class FB {
   async getFacebook(bot, chatId, url, userName) {
     let load = await bot.sendMessage(chatId, 'Loading, please wait.');
     try {
-      let get = await fbdown(url);
+      let get = await this.fbdown(url);
       if (!get.status) {
         await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
         let get2 = await this.getFBInfo(url);
