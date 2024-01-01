@@ -83,7 +83,7 @@ class BrainLy {
     if (!input) return bot.sendMessage(chatId, `Masukkan soal atau pertanyaan yang mau kamu cari di brainly, contoh\n/brainly berapa letak geografis indonesia`);
     try {
       bot.sendChatAction(chatId, 'typing');
-      let getdata = await Brainly(input, 10);
+      let getdata = await Brainly(input, 5);
       let results = ``;
       if (getdata.success) {
         const results = getdata.data.map(mil => {
@@ -92,7 +92,7 @@ class BrainLy {
           return `Pertanyaan: ${mil.pertanyaan.trim()}\nJawaban:\n${jawabanString.trim()}`;
         }).join('\n═════════════════════\n');
   
-        const chunkSize = 2500;
+        const chunkSize = 2000;
         for (let i = 0; i < results.length; i += chunkSize) {
           const chunk = results.substring(i, i + chunkSize);
           await bot.sendMessage(chatId, chunk, {
