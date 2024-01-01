@@ -25,7 +25,7 @@ class Youtube {
         let buff = await Func.getBuffer(get2.downloadLink);
         await fs.writeFileSync('/tmp/'+fname, buff);
         await bot.sendAudio(chatId, '/tmp/'+fname, { caption: 'Successful music download ' + get.title })
-        //await bot.deleteMessage(chatId, load.message_id);
+        await bot.deleteMessage(chatId, load.message_id);
         await fs.unlinkSync('/tmp/'+fname)
       } else {
         let data = [];
@@ -45,7 +45,7 @@ class Youtube {
           })
         }
         await bot.sendPhoto(chatId, `https://i.ytimg.com/vi/${get.videoId}/0.jpg`, options)
-        //await bot.deleteMessage(chatId, load.message_id);
+        await bot.deleteMessage(chatId, load.message_id);
       }
     } catch (err) {
       await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getYoutube()\n• Url: ${url}\n\n${err}`.trim());
@@ -72,7 +72,7 @@ class Youtube {
       await fs.unlinkSync('/tmp/'+fname);
     } catch (err) {
       await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getYoutubeVideo()\n• Url: https://www.youtube.com/${id}\n\n${err}`.trim());
-      return bot.editMessageText('An error occurred, failed to download video!', { chat_id: chatId, message_id: load.message_id })
+      await bot.editMessageText('An error occurred, failed to download video!', { chat_id: chatId, message_id: load.message_id })
     }
   }
   
@@ -95,7 +95,7 @@ class Youtube {
       await fs.unlinkSync('/tmp/'+fname);
     } catch (err) {
       await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getYoutubeAudio()\n• Url: https://www.youtube.com/${id}\n\n${err}`.trim());
-      return bot.editMessageText('An error occurred, failed to download audio!', { chat_id: chatId, message_id: load.message_id })
+      await bot.editMessageText('An error occurred, failed to download audio!', { chat_id: chatId, message_id: load.message_id })
     }
   }
 }
