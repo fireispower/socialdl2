@@ -133,7 +133,7 @@ Bot by ${constants.OWNER}`
           await Googlee.googleSearch(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '');
       } else if (constants.COMMAND_BRAINLY_REGEX.test(this.text)) {
           let input = this.text.replace(constants.COMMAND_BRAINLY, '');
-          let BRainly = new Brainly;
+          let BRainly = new BrainLy;
           await BRainly.getBrainlyAnswer(this.bot, this.body.message.chat.id, input, this.body.message.from.username ? this.body.message.from.username : '');
       } else if (constants.COMMAND_PINTEREST_S_REGEX.test(this.text)) {
           let input = this.text.replace(constants.COMMAND_PINTEREST_S, '');
