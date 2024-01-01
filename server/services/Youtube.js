@@ -68,7 +68,7 @@ class Youtube {
       let buff = await Func.getBuffer(res.downloadLink);
       await fs.writeFileSync('/tmp/'+fname, buff);
       await bot.sendVideo(chatId, '/tmp/'+fname, { caption: res.title });
-      await bot.deleteMessage(chatId, load.message_id);
+      //await bot.deleteMessage(chatId, load.message_id);
       await fs.unlinkSync('/tmp/'+fname);
     } catch (err) {
       await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getYoutubeVideo()\n• Url: https://www.youtube.com/${id}\n\n${err}`.trim());
@@ -91,7 +91,7 @@ class Youtube {
       let buff = await Func.getBuffer(res.downloadLink);
       await fs.writeFileSync('/tmp/'+fname, buff);
       await bot.sendAudio(chatId, '/tmp/'+fname, { caption: res.title });
-      await bot.deleteMessage(chatId, load.message_id);
+      //await bot.deleteMessage(chatId, load.message_id);
       await fs.unlinkSync('/tmp/'+fname);
     } catch (err) {
       await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getYoutubeAudio()\n• Url: https://www.youtube.com/${id}\n\n${err}`.trim());
