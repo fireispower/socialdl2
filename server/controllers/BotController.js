@@ -286,7 +286,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Th = new Threads;
-          await Threads.threadsDownload(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
+          await Th.threadsDownload(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
@@ -301,7 +301,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Git = new Github;
-          await Github.Clone(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
+          await Git.Clone(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '')
         } finally {
           userLocks[userId] = false;
         }
@@ -340,7 +340,7 @@ Bot by ${constants.OWNER}`
         let usrnm = this.body.callback_query.message.chat.username;
         await this.bot.deleteMessage(chatid, msgid);
         let XDL = new X;
-        await X.downloadxHigh(this.bot, chatid, usrnm);
+        await XDL.downloadxHigh(this.bot, chatid, usrnm);
       } else if (!this.text && this.body.callback_query.data.startsWith('twl')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
@@ -349,7 +349,7 @@ Bot by ${constants.OWNER}`
         let usrnm = this.body.callback_query.message.chat.username;
         await this.bot.deleteMessage(chatid, msgid);
         let XDL = new X;
-        await X.downloadxLow(this.bot, chatid, usrnm);
+        await XDL.downloadxLow(this.bot, chatid, usrnm);
       } else if (!this.text && this.body.callback_query.data.startsWith('twa')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
@@ -358,7 +358,7 @@ Bot by ${constants.OWNER}`
         let usrnm = this.body.callback_query.message.chat.username;
         await this.bot.deleteMessage(chatid, msgid);
         let XDL = new X;
-        await X.downloadxAudio(this.bot, chatid, usrnm);
+        await XDL.downloadxAudio(this.bot, chatid, usrnm);
       } else if (!this.text && this.body.callback_query.data.startsWith('spt')) {
         let data = this.body.callback_query.data;
         let url = data.split(' ').slice(1).join(' ');
