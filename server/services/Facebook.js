@@ -92,8 +92,8 @@ class FB {
       let ff = await axios.get(`https://krxuv-api.vercel.app/api/snapsave?apikey=Krxuvonly&url=${url}`)
       if (!get.status) {
         await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
-        let get2 = await this.getFBInfo(url);
-        await bot.sendVideo(chatId, get2.hd ? get2.hd : get2.sd, { caption: `Bot by @Krxuvv` })
+        let daty = ff.data
+        await bot.sendVideo(chatId, daty.results.data[0].url, { caption: `Bot by @Krxuvv` })
         return bot.deleteMessage(chatId, load.message_id);
       }
       let data = get.HD ? [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download HD Video', callback_data: 'fbh ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]] : [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]];
@@ -113,15 +113,8 @@ class FB {
       await bot.sendPhoto(chatId, get.thumb ? get.thumb : 'https://telegra.ph/file/35683519e0893130739da.jpg', options);
       await bot.deleteMessage(chatId, load.message_id);
     } catch (err) {
-      try {
-        await bot.editMessageText('Try Downloading video use Server V2, please wait!', { chat_id: chatId, message_id: load.message_id });
-        let daty = ff.data
-        await bot.sendVideo(chatId, daty.results.data[0].url, { caption: `Bot by @Krxuvv` })
-        return bot.deleteMessage(chatId, load.message_id);
-      } catch (e) {
         await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getFacebook()\n• Url: ${url}\n\n${err}`.trim());
         await bot.editMessageText('An error occurred, failed to download the video!', { chat_id: chatId, message_id: load.message_id });
-      }
     }
   }
   
