@@ -90,10 +90,12 @@ class FB {
     try {
       let get = await this.fbdown(url);
       let ff = await axios.get(`https://krxuv-api.vercel.app/api/snapsave?apikey=Krxuvonly&url=${url}`)
-      if (!get.status) {
+        if (!get.status) {
         await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
         let daty = ff.data
-        await bot.sendVideo(chatId, daty.results.data[0].url, { caption: `Bot by @Krxuvv` })
+        buff = await Func.getBuffer(daty.results.data[0].url)
+        await fs.writeFileSync('/tmp/Facebook_video_' + chatId + '.mp4', buff);
+        await bot.sendVideo(chatId, '/tmp/Facebook_video_' + chatId + '.mp4', { caption: `Bot by @Krxuvv` });
         return bot.deleteMessage(chatId, load.message_id)
       }
       let data = get.HD ? [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download HD Video', callback_data: 'fbh ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]] : [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]];
