@@ -90,7 +90,7 @@ class FB {
     try {
       let get = await this.fbdown(url);
       let ff = await axios.get(`https://krxuv-api.vercel.app/api/snapsave?apikey=Krxuvonly&url=${url}`)
-        if (!get.status) {
+      if (!get.status) {
         await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
         let daty = ff.data
         buff = await Func.getBuffer(daty.results.data[0].url)
