@@ -195,7 +195,7 @@ Bot by ${constants.OWNER}`
         try {
           await this.bot.sendMessage(process.env.OWNER_ID, `[ Usage Log ]\n◇ FIRST NAME : ${this.body.message.from.first_name ? this.body.message.from.first_name : "-"}\n◇ LAST NAME : ${this.body.message.from.last_name ? this.body.message.from.last_name : "-"}\n◇ USERNAME : ${this.body.message.from.username ? "@" + this.body.message.from.username : "-"}\n◇ ID : ${this.body.message.from.id}\n\nContent: ${this.text.slice(0, 1000)}`, { disable_web_page_preview: true })
           let Pin = new Pinterest;
-          await Pinterest.pinterest(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '');
+          await Pin.pinterest(this.bot, this.body.message.chat.id, this.text, this.body.message.from.username ? this.body.message.from.username : '');
         } finally {
           userLocks[userId] = false;
         }
