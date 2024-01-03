@@ -86,6 +86,7 @@ class FB {
   
   
   async getFacebook(bot, chatId, url, userName) {
+      return bot.sendMessage(chatId, 'Goblok')
     let   load = await bot.sendMessage(chatId, 'Loading, please wait.');
   try {
     let get = await this.fbdown(url);
