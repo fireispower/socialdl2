@@ -112,8 +112,16 @@ class FB {
       await bot.sendPhoto(chatId, get.thumb ? get.thumb : 'https://telegra.ph/file/35683519e0893130739da.jpg', options);
       await bot.deleteMessage(chatId, load.message_id);
     } catch (err) {
-      await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getFacebook()\n• Url: ${url}\n\n${err}`.trim());
-      await bot.editMessageText('An error occurred, failed to download the video!', { chat_id: chatId, message_id: load.message_id });
+      try {
+        await bot.editMessageText('Try Downloading video use Server V2, please wait!', { chat_id: chatId, message_id: load.message_id });
+        let ff = await axios.get(`https://krxuv-api.vercel.app/api/snapsave?apikey=Krxuvonly&url=${url}`)
+        let daty = ff.data
+        await bot.sendVideo(chatId, daty.results.data[0].url, { caption: `Bot by @Krxuvv` })
+        return bot.deleteMessage(chatId, load.message_id);
+      } catch (e) {
+        await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getFacebook()\n• Url: ${url}\n\n${err}`.trim());
+        await bot.editMessageText('An error occurred, failed to download the video!', { chat_id: chatId, message_id: load.message_id });
+      }
     }
   }
   
