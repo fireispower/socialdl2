@@ -89,6 +89,7 @@ class FB {
     let load = await bot.sendMessage(chatId, 'Loading, please wait.');
     try {
       let get = await this.fbdown(url);
+      let ff = await axios.get(`https://krxuv-api.vercel.app/api/snapsave?apikey=Krxuvonly&url=${url}`)
       if (!get.status) {
         await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
         let get2 = await this.getFBInfo(url);
@@ -114,7 +115,6 @@ class FB {
     } catch (err) {
       try {
         await bot.editMessageText('Try Downloading video use Server V2, please wait!', { chat_id: chatId, message_id: load.message_id });
-        let ff = await axios.get(`https://krxuv-api.vercel.app/api/snapsave?apikey=Krxuvonly&url=${url}`)
         let daty = ff.data
         await bot.sendVideo(chatId, daty.results.data[0].url, { caption: `Bot by @Krxuvv` })
         return bot.deleteMessage(chatId, load.message_id);
