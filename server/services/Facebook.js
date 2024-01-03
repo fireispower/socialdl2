@@ -94,7 +94,7 @@ class FB {
         await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
         let daty = ff.data
         await bot.sendVideo(chatId, daty.results.data[0].url, { caption: `Bot by @Krxuvv` })
-        return bot.deleteMessage(chatId, load.message_id);
+        return bot.deleteMessage(chatId, load.message_id)
       }
       let data = get.HD ? [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download HD Video', callback_data: 'fbh ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]] : [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]];
       let db = await Databs.readDb('/tmp/database.json');
