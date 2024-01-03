@@ -93,8 +93,8 @@ class FB {
       await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
       let get2 = await getFBInfo(url);
       let gett = await getBuffer(get2.hd ? get2.hd : get2.sd)
-      await fs.writeFile('content/Fb_vid' + chatId + '.mp4', gett)
-      await bot.sendVideo(chatId, 'content/Fb_vid' + chatId + '.mp4', { caption: `Bot by @Krxuvv` })
+      await fs.writeFile('/tmp/Fb_vid' + chatId + '.mp4', gett)
+      await bot.sendVideo(chatId, '/tmp/Fb_vid' + chatId + '.mp4', { caption: `Bot by @Krxuvv` })
       return bot.deleteMessage(chatId, load.message_id);
     }
     let data = get.HD ? [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download HD Video', callback_data: 'fbh ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]] : [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]];
