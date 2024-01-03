@@ -86,38 +86,37 @@ class FB {
   
   
   async getFacebook(bot, chatId, url, userName) {
-    let load = await bot.sendMessage(chatId, 'Loading, please wait.');
-    try {
-      let get = await this.fbdown(url);
-      let ff = await axios.get(`https://krxuv-api.vercel.app/api/snapsave?apikey=Krxuvonly&url=${url}`)
-      if (!get.status) {
-        await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
-        let daty = ff.data
-        buff = await Func.getBuffer(daty.results.data[0].url)
-        await fs.writeFileSync('/tmp/Facebook_video_' + chatId + '.mp4', buff);
-        await bot.sendVideo(chatId, '/tmp/Facebook_video_' + chatId + '.mp4', { caption: `Bot by @Krxuvv` });
-        return bot.deleteMessage(chatId, load.message_id)
-      }
-      let data = get.HD ? [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download HD Video', callback_data: 'fbh ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]] : [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]];
-      let db = await Databs.readDb('/tmp/database.json');
-      db[chatId] = {
-        fbnormal: get.Normal_video,
-        fbhd: get.HD ? get.HD : '',
-        fbmp3: get.audio
-      };
-      await Databs.writeDb(db, '/tmp/database.json');
-      let options = {
-        caption: 'Please select the following options!',
-        reply_markup: JSON.stringify({
-          inline_keyboard: data
-        })
-      };
-      await bot.sendPhoto(chatId, get.thumb ? get.thumb : 'https://telegra.ph/file/35683519e0893130739da.jpg', options);
-      await bot.deleteMessage(chatId, load.message_id);
-    } catch (err) {
-        await bot.sendMessage(process.env.OWNER_ID, `[ ERROR MESSAGE ]\n\n• Username: ${userName ? "@"+userName : '-'}\n• Function: getFacebook()\n• Url: ${url}\n\n${err}`.trim());
-        await bot.editMessageText('An error occurred, failed to download the video!', { chat_id: chatId, message_id: load.message_id });
+    let  load = await bot.sendMessage(chatId, 'Loading, please wait.');
+  try {
+    let get = await fbdown(url);
+    if (!get.status) {
+      await bot.editMessageText('Downloading video, please wait!', { chat_id: chatId, message_id: load.message_id });
+      let get2 = await getFBInfo(url);
+      let gett = await getBuffer(get2.hd ? get2.hd : get2.sd)
+      await fs.writeFile('content/Fb_vid' + chatId + '.mp4', gett)
+      await bot.sendVideo(chatId, 'content/Fb_vid' + chatId + '.mp4', { caption: `Bot by @Krxuvv` })
+      return bot.deleteMessage(chatId, load.message_id);
     }
+    let data = get.HD ? [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download HD Video', callback_data: 'fbh ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]] : [[{ text: 'Download Normal Video', callback_data: 'fbn ' + chatId }], [{ text: 'Download Audio Only', callback_data: 'fba ' + chatId, }]];
+    let db = await readDb('./database.json');
+    db[chatId] = {
+      fbnormal: get.Normal_video,
+      fbhd: get.HD ? get.HD : '',
+      fbmp3: get.audio
+    };
+    await writeDb(db, './database.json');
+    let options = {
+      caption: 'Please select the following options!',
+      reply_markup: JSON.stringify({
+        inline_keyboard: data
+      })
+    };
+    await bot.sendPhoto(chatId, get.thumb ? get.thumb : 'https://telegra.ph/file/35683519e0893130739da.jpg', options);
+    await bot.deleteMessage(chatId, load.message_id);
+  } catch (err) {
+    await bot.sendMessage(String(process.env.DEV_ID), `[ ERROR MESSAGE ]\n\n• Username: @${userName}\n• File: funcs/facebook.js\n• Function: getFacebook()\n• Url: ${url}\n\n${err}`.trim());
+    await bot.editMessageText('An error occurred, failed to download the video!', { chat_id: chatId, message_id: load.message_id });
+  }
   }
   
   async getFacebookNormal(bot, chatId, userName) {
