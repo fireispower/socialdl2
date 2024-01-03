@@ -32,7 +32,7 @@ class Instagram {
             try {
               await bot.sendVideo(chatId, get[0].url, { caption: `Bot by @Krxuvv` })
             } catch (err) {
-              let buff = await Func.getBuffer(get[0].url);
+              let buff = await Func.getBuffer(get[0].url ? get[0].url : get[0].thumbnail);
               await fs.writeFileSync('/tmp/vid-ig-single-' + chatId + '.mp4', buff)
               await bot.deleteMessage(chatId, load.message_id)
               await bot.sendVideo(chatId, '/tmp/vid-ig-single-' + chatId + '.mp4', { caption: `Bot by @Krxuvv` })
@@ -44,7 +44,7 @@ class Instagram {
             if (maru.type === 'Photo') {
               res.push({ type: 'photo', media: maru.thumbnail })
             } else {
-              res2.push({ type: 'video', media: maru.url })
+              res2.push({ type: 'video', media: maru.url ? maru.url : maru.thumbnail })
             }
           })
           let currentIndex = 0;
